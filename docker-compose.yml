@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  sovemo-quiz:
+    build: .
+    container_name: sovemo-quiz-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - ADMIN_PIN=sovemo2026
+    volumes:
+      - ./data:/app/data

@@ -1,0 +1,161 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "numero": 1,
+      "enunciado": "Tras 3 sesiones de láser Erbium:YAG, se realiza una biopsia de mucosa vaginal. ¿Cuál es el principal hallazgo histológico esperado?",
+      "opciones": {
+        "A": "Adelgazamiento del epitelio escamoso",
+        "B": "Disminución de la vascularización",
+        "C": "Neocolagénesis, elastogénesis y angiogénesis",
+        "D": "Sustitución por epitelio cilíndrico"
+      },
+      "correcta": "C",
+      "explicacion": "El láser Erbium:YAG estimula la regeneración del tejido conectivo de la lámina propia, promoviendo la síntesis de nuevas fibras de colágeno, elastina y neovascularización (angiogénesis)."
+    },
+    {
+      "id": 2,
+      "numero": 2,
+      "enunciado": "62 años, SGM y Liquen Escleroso Vulvar. Refiere prurito intratable y retracción de los labios menores. ¿Qué rol juega el láser en este escenario?",
+      "opciones": {
+        "A": "Está absolutamente contraindicado porque exacerba la autoinmunidad de la piel",
+        "B": "Cura definitivamente el liquen escleroso, reemplazando a los corticoides tópicos",
+        "C": "Actúa como coadyuvante para remodelar el tejido cicatrizal y aliviar el prurito, pero no reemplaza la terapia médica",
+        "D": "Solo es útil si se asocia con estrógenos conjugados equinos orales"
+      },
+      "correcta": "C",
+      "explicacion": "El láser fraccionado en liquen escleroso vulvar es una terapia adyuvante para bioestimular y remodelar la fibrosis y mejorar la sintomatología, manteniendo el tratamiento médico de base."
+    },
+    {
+      "id": 3,
+      "numero": 3,
+      "enunciado": "56 años. Vaginosis bacteriana a repetición recurrente a metronidazol. Mucosa vaginal pálida, lisa, pH 6. ¿Justificación fisiopatológica del láser?",
+      "opciones": {
+        "A": "El calor del láser esteriliza la vagina, matando a la Gardnerella vaginalis",
+        "B": "El láser destruye la microbiota anaerobia y favorece la colonización de hongos protectores",
+        "C": "Estimula la reepitelización y acumulación de glucógeno, favoreciendo la recuperación de lactobacilos y acidificación del pH",
+        "D": "Reduce el trofismo vaginal, disminuyendo el área de superficie vulnerable a bacterias"
+      },
+      "correcta": "C",
+      "explicacion": "Al engrosar el epitelio escamoso y aumentar la síntesis de glucógeno celular, los lactobacilos vuelven a tener sustrato metabólico para producir ácido láctico, restaurando el pH fisiológico (<4.5)."
+    },
+    {
+      "id": 4,
+      "numero": 4,
+      "enunciado": "65 años, 10 años en menopausia. Imposibilidad para la penetración x dolor. Atrofia, acortamiento y estrechez del introito. ¿Cuál es el abordaje ideal?",
+      "opciones": {
+        "A": "Dilatación mecánica forzada bajo anestesia",
+        "B": "Tratamiento quirúrgico inmediato de ensanchamiento del introito",
+        "C": "Terapia combinada: Láser fraccionado/estrógenos + hidratantes locales (si no hay contraindicación) + terapia manual/dilatadores",
+        "D": "Lubricantes a base de agua exclusivamente"
+      },
+      "correcta": "C",
+      "explicacion": "El manejo óptimo del SGM severo con estenosis requiere un enfoque multimodal: regeneración tisular (láser/estrógenos locales) y recuperación progresiva de la elasticidad (terapia manual y dilatadores)."
+    },
+    {
+      "id": 5,
+      "numero": 5,
+      "enunciado": "Al evaluar a una candidata para láser vaginal, ¿Cuál de las siguientes representa una contraindicación ABSOLUTA para realizar la sesión?",
+      "opciones": {
+        "A": "Infección pélvica o vaginal activa (ej. VPH activo, Herpes genital)",
+        "B": "Antecedente de Trombosis Venosa Profunda (TVP)",
+        "C": "Uso crónico de bifosfonatos",
+        "D": "Miomatosis uterina asintomática"
+      },
+      "correcta": "A",
+      "explicacion": "Cualquier proceso infeccioso o lesión activa en el canal o tracto genital es una contraindicación absoluta para aplicar procedimientos térmicos/ablativos hasta su resolución completa."
+    },
+    {
+      "id": 6,
+      "numero": 6,
+      "enunciado": "¿Cuántas sesiones de láser CO2 fraccionado se requieren habitualmente para alcanzar el pico de mejoría clínica en SGM?",
+      "opciones": {
+        "A": "1 sola sesión de por vida",
+        "B": "3 sesiones espaciadas por 4 a 6 semanas",
+        "C": "1 sesión semanal durante 3 meses",
+        "D": "10 sesiones consecutivas"
+      },
+      "correcta": "B",
+      "explicacion": "El protocolo estándar validado en la literatura internacional contempla 3 sesiones separadas por intervalos de 4 a 6 semanas para permitir la fase de remodelado tisular y regeneración completa."
+    },
+    {
+      "id": 7,
+      "numero": 7,
+      "enunciado": "54 años, ooforectomizada por CA de ovario. Presenta ardor vaginal intenso y dispareunia severa. ¿Cuál es el manejo terapéutico más apropiado?",
+      "opciones": {
+        "A": "Estradiol vaginal en crema 2 veces por semana",
+        "B": "Terapia de Reemplazo Hormonal (TRH) sistémica combinada",
+        "C": "Láser fraccionado (CO2 o Erbium) más hidratantes locales libres de hormonas",
+        "D": "Promestrieno vaginal diario de forma indefinida"
+      },
+      "correcta": "C",
+      "explicacion": "En sobrevivientes de neoplasias ginecológicas u hormonodependientes donde los estrógenos están contraindicados o restringidos, las terapias de base energética (láser) junto con lubricantes/hidratantes no hormonales son la opción de elección."
+    },
+    {
+      "id": 8,
+      "numero": 8,
+      "enunciado": "Paciente acaba de terminar su primera sesión de láser. ¿Cuál es la indicación de cuidado post-tratamiento más importante?",
+      "opciones": {
+        "A": "Reposo absoluto en cama por 48 horas",
+        "B": "Uso profiláctico de antibióticos orales por 7 días",
+        "C": "Abstinencia sexual e inmersión en agua por 5 a 7 días",
+        "D": "Aplicación inmediata de estrógenos locales a dosis altas"
+      },
+      "correcta": "C",
+      "explicacion": "Se indica abstinencia coital y evitar baños de inmersión/piscinas durante 5 a 7 días posteriores para prevenir microtraumatismos e infecciones durante el proceso de reepitelización de las microzonas térmicas."
+    },
+    {
+      "id": 9,
+      "numero": 9,
+      "enunciado": "Paciente de 58 años, consulta por sangrado vaginal leve tras las relaciones sexuales (sinusorragia). Al examen: atrofia vaginal severa, petequias en mucosa. ¿Conducta?",
+      "opciones": {
+        "A": "El sangrado se debe a la fragilidad capilar por la atrofia; el láser regenera el epitelio y disminuye estos síntomas",
+        "B": "Es un síntoma normal de la edad, no requiere ningún estudio ni manejo particular",
+        "C": "Está contraindicado el uso de láser debido al sangrado activo",
+        "D": "Indicar antibióticos preventivos para evitar infección de las lesiones"
+      },
+      "correcta": "A",
+      "explicacion": "Descartada patología maligna cervical o endometrial, la sinusorragia por atrofia severa responde favorablemente al tratamiento regenerativo con láser al aumentar el grosor epitelial y restaurar la resistencia capilar."
+    },
+    {
+      "id": 10,
+      "numero": 10,
+      "enunciado": "Paciente de 61 años con diagnóstico de Osteoporosis (T-score -2.9 en columna) y SGM severo. ¿Cuál es el enfoque terapéutico integral recomendado?",
+      "opciones": {
+        "A": "Tratamiento farmacológico de osteoporosis (antirresortivo/anabólico) + terapia regenerativa local (láser/hidratantes) para SGM",
+        "B": "Solo suplementos de calcio, posponiendo cualquier terapia para la atrofia genital",
+        "C": "El tratamiento de la osteoporosis revierte de forma directa y espontánea el trofismo vaginal",
+        "D": "Suspender actividad física y reposo articular permanente"
+      },
+      "correcta": "A",
+      "explicacion": "(Pregunta 10 personalizable desde el panel de administración). Enfoque integral SOVEMO: manejo preventivo y terapéutico del hueso combinado con la restauración del trofismo urogenital y calidad de vida."
+    },
+    {
+      "id": 11,
+      "numero": 11,
+      "enunciado": "52 años, antecedente de Ca de mama (RE+) en tratamiento con Tamoxifeno. Presenta dispareunia severa y sequedad vaginal refractaria. ¿Cuál es la terapia más segura?",
+      "opciones": {
+        "A": "Estriol vaginal a dosis estándar",
+        "B": "Terapia de reemplazo hormonal sistémica",
+        "C": "Láser de CO2 fraccionado vaginal",
+        "D": "Testosterona tópica vulvar"
+      },
+      "correcta": "C",
+      "explicacion": "En pacientes con cáncer de mama receptor de estrógeno positivo (RE+), el láser fraccionado vaginal ofrece una alternativa eficaz, segura y libre de hormonas para el tratamiento del SGM refractario a hidratantes convencionales."
+    }
+  ],
+  "currentQuestionId": 10,
+  "isVotingOpen": true,
+  "isRevealed": false,
+  "votes": {
+    "1": {
+      "usr_zuhrfkc3_mv0wx6v2": "A"
+    },
+    "2": {
+      "usr_zuhrfkc3_mv0wx6v2": "C"
+    },
+    "3": {
+      "usr_zuhrfkc3_mv0wx6v2": "C"
+    }
+  }
+}

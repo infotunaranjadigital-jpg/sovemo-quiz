@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOVEMO | Plataforma Interactiva de Votación y Proyección</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-between text-slate-800">
+
+  <!-- Curva decorativa superior SOVEMO -->
+  <div class="sovemo-wave-header !h-40">
+    <div class="sovemo-wave-accent"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="relative z-10 max-w-5xl mx-auto w-full px-6 py-6 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <div class="w-14 h-14 bg-white rounded-2xl p-1.5 shadow-xl flex items-center justify-center border border-white/60">
+        <img src="/img/sovemo-banner.jpg" alt="SOVEMO Logo" class="w-full h-full object-contain">
+      </div>
+      <div>
+        <h1 class="text-xl font-black text-white tracking-wider uppercase">SOVEMO</h1>
+        <p class="text-xs text-blue-100 font-medium">Sociedad Venezolana de Menopausia y Osteoporosis</p>
+      </div>
+    </div>
+    <span class="bg-white/20 backdrop-blur-md text-white text-xs px-3.5 py-1.5 rounded-full font-bold uppercase tracking-wider border border-white/30">
+      Tiempo Real &bull; v1.0
+    </span>
+  </header>
+
+  <!-- Contenido Central -->
+  <main class="relative z-10 max-w-5xl mx-auto w-full px-6 py-10 flex-1 flex flex-col justify-center">
+
+    <div class="text-center mb-10">
+      <span class="live-badge mb-3">
+        <span class="live-dot"></span> Sistema Médico Educativo
+      </span>
+      <h2 class="text-3xl md:text-4xl font-black text-[#1E478E] mb-3 tracking-tight">
+        Plataforma Interactiva de Votación y Proyección
+      </h2>
+      <p class="text-slate-600 text-base max-w-2xl mx-auto font-medium">
+        Herramienta en tiempo real para actividades académicas médicas con gráficos dinámicos, control pregunta a pregunta y exportación de datos.
+      </p>
+    </div>
+
+    <!-- Las 3 Puertas de Acceso -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Opción 1: Proyector / Auditorio -->
+      <a href="/pantalla" class="sovemo-card p-6 flex flex-col justify-between hover:border-[#1E478E] hover:shadow-2xl transition-all group">
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-blue-50 text-[#1E478E] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-inner">
+            <i data-lucide="projector" class="w-7 h-7"></i>
+          </div>
+          <span class="text-[10px] font-black uppercase tracking-widest text-[#1E478E] block mb-1">Para el Salón / Videobeam</span>
+          <h3 class="text-xl font-extrabold text-slate-900 mb-2">Pantalla de Proyección</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-6 font-medium">
+            Muestra el código QR para la audiencia, gráficos de barras con motion graphics en vivo y la revelación de la respuesta médica con animación.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-bold text-[#1E478E] group-hover:gap-3 transition-all">
+          <span>Abrir Proyección</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </div>
+      </a>
+
+      <!-- Opción 2: Votar / Móvil -->
+      <a href="/votar" class="sovemo-card p-6 flex flex-col justify-between hover:border-[#398E7E] hover:shadow-2xl transition-all group border-t-4 border-[#398E7E]">
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-[#398E7E] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-inner">
+            <i data-lucide="smartphone" class="w-7 h-7"></i>
+          </div>
+          <span class="text-[10px] font-black uppercase tracking-widest text-[#398E7E] block mb-1">Para los Participantes</span>
+          <h3 class="text-xl font-extrabold text-slate-900 mb-2">Formulario de Votación</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-6 font-medium">
+            Interfaz táctil responsiva para teléfonos inteligentes. Selección rápida de opciones A, B, C, D con confirmación y bloqueo de doble voto.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-bold text-[#398E7E] group-hover:gap-3 transition-all">
+          <span>Entrar a Votar</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </div>
+      </a>
+
+      <!-- Opción 3: Admin / Moderador -->
+      <a href="/admin" class="sovemo-card p-6 flex flex-col justify-between hover:border-slate-800 hover:shadow-2xl transition-all group">
+        <div>
+          <div class="w-14 h-14 rounded-2xl bg-slate-100 text-slate-800 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-inner">
+            <i data-lucide="sliders-horizontal" class="w-7 h-7"></i>
+          </div>
+          <span class="text-[10px] font-black uppercase tracking-widest text-slate-500 block mb-1">Para el Moderador</span>
+          <h3 class="text-xl font-extrabold text-slate-900 mb-2">Panel de Administración</h3>
+          <p class="text-xs text-slate-600 leading-relaxed mb-6 font-medium">
+            Control de avance entre preguntas, activación de votación, revelación de resultados, descarga a CSV y limpieza/reinicio seguro.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-bold text-slate-800 group-hover:gap-3 transition-all">
+          <span>Acceder al Panel</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </div>
+      </a>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-5 text-center text-xs text-slate-500 border-t border-slate-200 bg-white">
+    Sociedad Venezolana de Menopausia y Osteoporosis (SOVEMO) &copy; 2026 &bull; Diseñado para Actividades Médicas
+  </footer>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

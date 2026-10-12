@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOVEMO | Proyección en Vivo - Resultados en Tiempo Real</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Canvas Confetti CDN para animación de revelación -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- QRCode.js CDN para generar QR en vivo -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- Socket.IO -->
+  <script src="/socket.io/socket.io.js"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* Efecto de resplandor para proyector */
+    .glow-header {
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex flex-col justify-between text-slate-800 overflow-x-hidden select-none">
+
+  <!-- Curva decorativa superior SOVEMO -->
+  <div class="sovemo-wave-header !h-32">
+    <div class="sovemo-wave-accent"></div>
+  </div>
+
+  <!-- Header Proyector -->
+  <header class="relative z-10 max-w-7xl mx-auto w-full px-8 py-5 flex items-center justify-between">
+    <div class="flex items-center gap-5">
+      <div class="w-16 h-16 bg-white rounded-2xl p-2 shadow-xl flex items-center justify-center border-2 border-white/60">
+        <img src="/img/sovemo-banner.jpg" alt="SOVEMO Logo" class="w-full h-full object-contain">
+      </div>
+      <div>
+        <h1 class="text-2xl font-black text-white tracking-wider uppercase glow-header flex items-center gap-3">
+          SOVEMO
+          <span class="text-xs bg-[#398E7E] text-white px-3 py-1 rounded-full font-bold uppercase tracking-widest shadow-md">
+            En Vivo
+          </span>
+        </h1>
+        <p class="text-sm text-blue-100 font-medium">Sociedad Venezolana de Menopausia y Osteoporosis &bull; Actividad Académica</p>
+      </div>
+    </div>
+
+    <!-- Indicadores en Vivo -->
+    <div class="flex items-center gap-4">
+      <!-- Contador de participantes -->
+      <div class="bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-2xl shadow-lg border border-slate-200 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-50 text-[#1E478E] flex items-center justify-center">
+          <i data-lucide="users" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="text-xs text-slate-500 font-semibold block uppercase">Participantes</span>
+          <span id="activeParticipantsCount" class="text-lg font-extrabold text-[#1E478E] leading-none">0</span>
+        </div>
+      </div>
+
+      <!-- Estado de Votación -->
+      <div id="screenVotingBadge" class="bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-2xl shadow-lg border border-slate-200 flex items-center gap-3">
+        <div class="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-ping"></div>
+        <span id="screenVotingText" class="text-sm font-extrabold text-emerald-700 tracking-wide">
+          SISTEMA ACTIVO
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Central -->
+  <main class="relative z-10 max-w-7xl mx-auto w-full px-8 py-4 flex-1 flex flex-col justify-center">
+
+    <!-- Modo 1: Pantalla de Bienvenida con QR Code para unirse -->
+    <div id="screenWelcomeView" class="sovemo-card p-12 text-center max-w-4xl mx-auto w-full animate-slide-up shadow-2xl">
+      <span class="live-badge mb-4">
+        <span class="live-dot"></span> Dinámica Interactiva
+      </span>
+      <h2 class="text-4xl font-extrabold text-[#1E478E] mb-4 tracking-tight">
+        ¡Participa en Vivo desde tu Teléfono!
+      </h2>
+      <p class="text-slate-600 text-lg max-w-2xl mx-auto mb-8 font-medium">
+        Escanea el código QR con la cámara de tu teléfono para entrar a la plataforma de votación y responder cada pregunta médica en tiempo real.
+      </p>
+
+      <div class="flex flex-col md:flex-row items-center justify-center gap-10 bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl p-8 mb-6">
+        <!-- Código QR -->
+        <div class="bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex flex-col items-center">
+          <div id="qrcodeCanvas"></div>
+          <span class="text-xs text-slate-400 font-bold mt-2 tracking-wider">ESCANEA AQUÍ</span>
+        </div>
+
+        <div class="text-left space-y-4">
+          <div class="flex items-start gap-4">
+            <span class="w-8 h-8 rounded-full bg-[#1E478E] text-white font-bold flex items-center justify-center shrink-0">1</span>
+            <p class="text-sm text-slate-700 font-semibold">Abre la cámara o escáner QR de tu smartphone.</p>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="w-8 h-8 rounded-full bg-[#398E7E] text-white font-bold flex items-center justify-center shrink-0">2</span>
+            <p class="text-sm text-slate-700 font-semibold">Ingresa al enlace o escribe en tu navegador:</p>
+          </div>
+          <div class="bg-white px-5 py-3 rounded-xl border border-slate-300 font-mono text-base font-bold text-[#1E478E] shadow-sm">
+            <span id="directJoinUrl">http://.../votar</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-sm font-semibold text-slate-500 animate-pulse">
+        Esperando que el moderador dé inicio a la primera pregunta...
+      </div>
+    </div>
+
+    <!-- Modo 2: Pregunta en Pantalla Grande con Gráficos Motion Graphics -->
+    <div id="screenQuestionView" class="hidden flex-col gap-6 animate-slide-up w-full">
+
+      <!-- Barra superior de pregunta -->
+      <div class="sovemo-card p-8 border-l-8 border-[#1E478E] shadow-xl">
+        <div class="flex items-center justify-between mb-4">
+          <span id="screenQBadge" class="bg-blue-100 text-[#1E478E] font-black text-sm px-4 py-1.5 rounded-full uppercase tracking-wider">
+            Pregunta 1 de 11
+          </span>
+          <div class="flex items-center gap-3 bg-slate-100 px-4 py-1.5 rounded-full">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-[#398E7E]"></i>
+            <span class="text-xs font-bold text-slate-600">Total Votos: <span id="screenTotalVotes" class="text-[#1E478E] font-black text-sm">0</span></span>
+          </div>
+        </div>
+        <h2 id="screenQEnunciado" class="text-2xl md:text-3xl font-extrabold text-slate-900 leading-snug">
+          Cargando enunciado...
+        </h2>
+      </div>
+
+      <!-- Contenedor de Opciones y Barras de Porcentaje -->
+      <div id="screenOptionsList" class="grid grid-cols-1 gap-4">
+        <!-- Generado dinámicamente con barras de progreso animadas -->
+      </div>
+
+      <!-- Banner de Revelación y Explicación Médica -->
+      <div id="screenRevealBanner" class="hidden sovemo-card p-6 bg-gradient-to-r from-emerald-50 via-teal-50 to-white border-2 border-[#398E7E] animate-scale-in">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-10 h-10 bg-[#398E7E] text-white rounded-xl flex items-center justify-center shadow-md">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-black text-[#1E478E] uppercase tracking-wide">
+              Respuesta Correcta: Opción <span id="screenCorrectLetter" class="text-[#398E7E]">C</span>
+            </h3>
+            <p class="text-xs text-slate-500 font-semibold">Fundamento Médico y Guías Clínicas</p>
+          </div>
+        </div>
+        <p id="screenExplanationText" class="text-slate-700 text-sm md:text-base font-medium leading-relaxed pl-13 mt-2">
+        </p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer Proyector -->
+  <footer class="relative z-10 max-w-7xl mx-auto w-full px-8 py-4 flex items-center justify-between text-xs text-slate-500 font-semibold border-t border-slate-200">
+    <div>
+      Sociedad Venezolana de Menopausia y Osteoporosis (SOVEMO) &bull; Plataforma Interactiva en Tiempo Real
+    </div>
+    <div class="flex items-center gap-4">
+      <span>Presione <kbd class="px-2 py-0.5 bg-slate-200 rounded text-slate-700 font-mono">F11</kbd> para pantalla completa</span>
+    </div>
+  </footer>
+
+  <script src="/js/pantalla.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "sovemo-quiz-live",
+  "version": "1.0.0",
+  "description": "Sistema de votación interactivo en tiempo real para SOVEMO",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}

@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap');
+
+:root {
+  --sovemo-blue: #1E478E;
+  --sovemo-blue-dark: #123063;
+  --sovemo-blue-light: #2a5fba;
+  --sovemo-teal: #398E7E;
+  --sovemo-teal-dark: #276559;
+  --sovemo-teal-light: #48b39e;
+  --sovemo-white: #FFFFFF;
+  --sovemo-bg: #F4F7FB;
+  --sovemo-card: #FFFFFF;
+  --sovemo-text: #1E293B;
+  --sovemo-muted: #64748B;
+  --border-radius-lg: 20px;
+  --border-radius-md: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--sovemo-bg);
+  color: var(--sovemo-text);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Curvas orgánicas inspiradas en el pendón corporativo de SOVEMO */
+.sovemo-wave-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 220px;
+  background: linear-gradient(135deg, var(--sovemo-blue) 0%, var(--sovemo-blue-dark) 100%);
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  z-index: 0;
+  box-shadow: 0 10px 30px rgba(30, 71, 142, 0.15);
+}
+
+.sovemo-wave-accent {
+  position: absolute;
+  bottom: -15px;
+  right: 10%;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(57, 142, 126, 0.35) 0%, rgba(57, 142, 126, 0) 70%);
+  border-radius: 50%;
+  filter: blur(10px);
+}
+
+/* Glassmorphism & Cards */
+.sovemo-card {
+  background: var(--sovemo-card);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 12px 35px -5px rgba(30, 71, 142, 0.08), 0 4px 10px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Motion Graphic animations */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(57, 142, 126, 0.4); }
+  70% { box-shadow: 0 0 0 16px rgba(57, 142, 126, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(57, 142, 126, 0); }
+}
+
+@keyframes correctShine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes floatAnim {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.animate-float {
+  animation: floatAnim 3.5s ease-in-out infinite;
+}
+
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(57, 142, 126, 0.12);
+  color: var(--sovemo-teal);
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  background: var(--sovemo-teal);
+  border-radius: 50%;
+  animation: pulseGlow 1.8s infinite;
+}
+
+/* Botones de Votación (Móvil) */
+.vote-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: #FFFFFF;
+  border: 2px solid #E2E8F0;
+  border-radius: var(--border-radius-md);
+  color: var(--sovemo-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  position: relative;
+  user-select: none;
+}
+
+.vote-btn:active {
+  transform: scale(0.98);
+}
+
+.vote-btn .badge-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  background: #EDF2F7;
+  color: var(--sovemo-blue);
+  font-weight: 800;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.vote-btn:hover:not(:disabled) {
+  border-color: var(--sovemo-teal);
+  background: #F0FDF4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(57, 142, 126, 0.12);
+}
+
+.vote-btn:hover:not(:disabled) .badge-letter {
+  background: var(--sovemo-teal);
+  color: #FFFFFF;
+}
+
+.vote-btn.selected {
+  border-color: var(--sovemo-blue);
+  background: rgba(30, 71, 142, 0.05);
+  box-shadow: 0 0 0 3px rgba(30, 71, 142, 0.2);
+}
+
+.vote-btn.selected .badge-letter {
+  background: var(--sovemo-blue);
+  color: #FFFFFF;
+}
+
+.vote-btn.correct-reveal {
+  border-color: var(--sovemo-teal) !important;
+  background: rgba(57, 142, 126, 0.1) !important;
+}
+
+.vote-btn.correct-reveal .badge-letter {
+  background: var(--sovemo-teal) !important;
+  color: #FFFFFF !important;
+}
+
+/* Barras de porcentaje en Proyector (/pantalla) */
+.bar-track {
+  width: 100%;
+  height: 64px;
+  background: #F1F5F9;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid #E2E8F0;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--sovemo-blue) 0%, var(--sovemo-teal) 100%);
+  border-radius: 14px;
+  transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: correctShine 3s infinite linear;
+}
+
+.bar-fill.highlight-correct {
+  background: linear-gradient(90deg, #276559 0%, #398E7E 50%, #48b39e 100%) !important;
+  box-shadow: 0 0 25px rgba(57, 142, 126, 0.6);
+}
+
+/* Tarjeta de Opción en Proyector */
+.screen-option-card {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: var(--border-radius-md);
+  padding: 14px 18px;
+  background: #FFFFFF;
+  border: 2px solid #E2E8F0;
+}
+
+.screen-option-card.winner {
+  border-color: var(--sovemo-teal);
+  background: #F0FDF4;
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(57, 142, 126, 0.2);
+}
+
+/* Botones principales SOVEMO */
+.btn-sovemo {
+  background: linear-gradient(135deg, var(--sovemo-blue) 0%, var(--sovemo-blue-dark) 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(30, 71, 142, 0.25);
+}
+
+.btn-sovemo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(30, 71, 142, 0.35);
+}
+
+.btn-teal {
+  background: linear-gradient(135deg, var(--sovemo-teal) 0%, var(--sovemo-teal-dark) 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(57, 142, 126, 0.25);
+}
+
+.btn-teal:hover {
+  box-shadow: 0 8px 25px rgba(57, 142, 126, 0.35);
+}
+
+/* Scrollbar moderno */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
