@@ -43,6 +43,11 @@ const editOptD = document.getElementById('editOptD');
 const editCorrecta = document.getElementById('editCorrecta');
 const editExplicacion = document.getElementById('editExplicacion');
 
+const totalQuestionsBadge = document.getElementById('totalQuestionsBadge');
+const btnAddQuestionSidebar = document.getElementById('btnAddQuestionSidebar');
+const btnAddQuestionEditor = document.getElementById('btnAddQuestionEditor');
+const btnDeleteQuestion = document.getElementById('btnDeleteQuestion');
+
 // Autenticación con PIN
 function checkAuth() {
   if (currentPin) {
@@ -98,6 +103,9 @@ function renderAdminUI() {
 
 function renderQuestionsNav() {
   questionsNavList.innerHTML = '';
+  if (totalQuestionsBadge) {
+    totalQuestionsBadge.textContent = currentOverview.questions.length;
+  }
 
   currentOverview.questions.forEach((q) => {
     const item = document.createElement('div');
@@ -339,7 +347,7 @@ btnResetActivity.addEventListener('click', () => {
 editQuestionForm.addEventListener('submit', (e) => {
   e.preventDefault();
   if (!activeQuestionId) {
-    alert('Primero selecciona una pregunta para editarla.');
+    alert('Primero selecciona una pregunta de la lista izquierda para editarla.');
     return;
   }
 
@@ -373,6 +381,79 @@ editQuestionForm.addEventListener('submit', (e) => {
       alert('Error al guardar la pregunta: ' + err.message);
     });
 });
+
+// Agregar nueva pregunta
+function handleAddQuestion() {
+  if (!currentPin) return;
+
+  fetch('/api/add-question', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ pin: currentPin })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok && data.question) {
+        selectQuestion(data.question.id);
+        setTimeout(() => {
+          editEnunciado.focus();
+          editEnunciado.select();
+          editQuestionForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 250);
+      }
+    })
+    .catch(err => {
+      alert('Error al crear nueva pregunta: ' + err.message);
+    });
+}
+
+if (btnAddQuestionSidebar) {
+  btnAddQuestionSidebar.addEventListener('click', handleAddQuestion);
+}
+if (btnAddQuestionEditor) {
+  btnAddQuestionEditor.addEventListener('click', handleAddQuestion);
+}
+
+// Eliminar pregunta seleccionada
+if (btnDeleteQuestion) {
+  btnDeleteQuestion.addEventListener('click', () => {
+    if (!activeQuestionId || !currentOverview) {
+      alert('Primero selecciona la pregunta que deseas eliminar en la lista de la izquierda.');
+      return;
+    }
+
+    if (currentOverview.questions.length <= 1) {
+      alert('Debe existir al menos 1 pregunta en el cuestionario.');
+      return;
+    }
+
+    const currentQ = currentOverview.questions.find(q => q.id === activeQuestionId);
+    const qLabel = currentQ ? `Pregunta ${currentQ.numero}: "${currentQ.enunciado}"` : 'esta pregunta';
+
+    if (!confirm(`¿Estás seguro de que deseas eliminar ${qLabel}?\n\nLas preguntas restantes se reenumerarán automáticamente.`)) {
+      return;
+    }
+
+    fetch('/api/delete-question', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pin: currentPin,
+        questionId: activeQuestionId
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          activeQuestionId = data.currentQuestionId;
+          fetchOverview();
+        }
+      })
+      .catch(err => {
+        alert('Error al eliminar la pregunta: ' + err.message);
+      });
+  });
+}
 
 // Escuchar actualizaciones en vivo por WebSocket
 socket.on('stats-updated', (data) => {

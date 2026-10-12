@@ -236,6 +236,78 @@ app.post('/api/update-question', (req, res) => {
   res.json({ ok: true, question: state.questions[idx] });
 });
 
+function renumberQuestions() {
+  state.questions.forEach((q, index) => {
+    q.numero = index + 1;
+  });
+}
+
+// API Admin: Agregar nueva pregunta
+app.post('/api/add-question', (req, res) => {
+  const { pin, question } = req.body;
+  if (pin !== ADMIN_PIN) {
+    return res.status(401).json({ error: 'PIN incorrecto' });
+  }
+
+  const maxId = state.questions.reduce((max, q) => Math.max(max, q.id || 0), 0);
+  const newNumero = state.questions.length + 1;
+
+  const newQuestion = {
+    id: maxId + 1,
+    numero: newNumero,
+    enunciado: question?.enunciado || `Nueva Pregunta ${newNumero} - Escribe aquí el enunciado médico`,
+    opciones: {
+      A: question?.opciones?.A || 'Opción A',
+      B: question?.opciones?.B || 'Opción B',
+      C: question?.opciones?.C || 'Opción C',
+      D: question?.opciones?.D || 'Opción D'
+    },
+    correcta: question?.correcta || 'A',
+    explicacion: question?.explicacion || 'Escribe aquí la fundamentación clínica de la respuesta correcta.'
+  };
+
+  state.questions.push(newQuestion);
+  renumberQuestions();
+  saveState();
+
+  io.emit('state-changed', getPublicState());
+  res.json({ ok: true, question: newQuestion, totalQuestions: state.questions.length });
+});
+
+// API Admin: Eliminar una pregunta
+app.post('/api/delete-question', (req, res) => {
+  const { pin, questionId } = req.body;
+  if (pin !== ADMIN_PIN) {
+    return res.status(401).json({ error: 'PIN incorrecto' });
+  }
+
+  const idx = state.questions.findIndex(q => q.id === questionId);
+  if (idx === -1) {
+    return res.status(404).json({ error: 'Pregunta no encontrada' });
+  }
+
+  state.questions.splice(idx, 1);
+  if (state.votes[questionId]) {
+    delete state.votes[questionId];
+  }
+
+  renumberQuestions();
+
+  if (state.currentQuestionId === questionId) {
+    state.currentQuestionId = state.questions.length > 0 ? state.questions[0].id : null;
+    state.isVotingOpen = false;
+    state.isRevealed = false;
+  }
+
+  saveState();
+  io.emit('state-changed', getPublicState());
+  res.json({
+    ok: true,
+    currentQuestionId: state.currentQuestionId,
+    totalQuestions: state.questions.length
+  });
+});
+
 // WebSockets en Tiempo Real
 io.on('connection', (socket) => {
   // Enviar estado inicial inmediato al cliente conectado
