@@ -123,14 +123,16 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(57, 142, 126, 0.12);
-  color: var(--sovemo-teal);
-  padding: 6px 14px;
+  background: #FFFFFF;
+  color: var(--sovemo-blue);
+  padding: 8px 18px;
   border-radius: 9999px;
-  font-weight: 700;
-  font-size: 0.8rem;
+  font-weight: 800;
+  font-size: 0.82rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  border: 1.5px solid #CBD5E1;
+  box-shadow: 0 4px 15px rgba(30, 71, 142, 0.12);
 }
 
 .live-dot {
